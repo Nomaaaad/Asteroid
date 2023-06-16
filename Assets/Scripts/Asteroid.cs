@@ -3,13 +3,16 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour
 {
     [SerializeField] private Sprite[] sprites;
-    [SerializeField] private float size = 1f;
-    [SerializeField] private float minSize = .5f;
-    [SerializeField] private float maxSize = 1.5f;
+
+    [SerializeField] private float speed = 50;
+    [SerializeField] private float maxLifetime = 50;
 
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
 
+    public float size = 1f;
+    public float minSize = .5f;
+    public float maxSize = 1.5f;
 
     private void Awake()
     {
@@ -25,5 +28,12 @@ public class Asteroid : MonoBehaviour
         transform.localScale = Vector3.one * size;
 
         _rigidbody2D.mass = size;
+    }
+
+    public void SetTrajectory(Vector2 direction)
+    {
+        _rigidbody2D.AddForce(direction * speed);
+
+        Destroy(gameObject, maxLifetime);
     }
 }

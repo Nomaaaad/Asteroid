@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float _speed = 500f;
-    [SerializeField] private float _maxLifetime = 10f;
+    [SerializeField] private float speed = 500f;
+    [SerializeField] private float maxLifetime = 10f;
 
     private Rigidbody2D _rigidbody2D;
 
@@ -14,9 +14,9 @@ public class Bullet : MonoBehaviour
 
     public void Project(Vector2 direction)
     {
-        _rigidbody2D.AddForce(direction * _speed);
+        _rigidbody2D.AddForce(direction * speed);
 
-        Destroy(gameObject, _maxLifetime);
+        Destroy(gameObject, maxLifetime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
