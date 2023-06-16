@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     public Player player;
     public ParticleSystem explosion;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI liveText;
 
     public float respawnTime = 3;
     public int lives = 3;
@@ -15,6 +18,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        scoreText.text = "0";
+        liveText.text = lives.ToString();
     }
 
 
@@ -36,6 +41,8 @@ public class GameManager : MonoBehaviour
         {
             score += 25;
         }
+
+        scoreText.text = score.ToString();
     }
 
     public void PlayerDied()
@@ -53,6 +60,8 @@ public class GameManager : MonoBehaviour
         {
             Invoke(nameof(Respawn), respawnTime);
         }
+
+        liveText.text = lives.ToString();
 
     }
 
@@ -73,6 +82,11 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        //
+        lives = 3;
+        score = 0;
+        scoreText.text = "0";
+        liveText.text = lives.ToString();
+        Invoke(nameof(Respawn), respawnTime);
+
     }
 }
