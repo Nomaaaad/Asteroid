@@ -35,11 +35,13 @@ public class Asteroid : MonoBehaviour
     {
         if(collision.gameObject.tag == "Bullet")
         {
-            if((size / 2) > minSize)
+            if ((size / 2) > minSize)
             {
                 CreateSplit();
                 CreateSplit();
             }
+
+            GameManager.Instance.AsteroidDestroyed(this);
 
             Destroy(gameObject);
         }
